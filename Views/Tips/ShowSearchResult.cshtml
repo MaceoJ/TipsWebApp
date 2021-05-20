@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<TipsTricksWebApp.Models.Tip>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ShowSearchResult";
 }
 
 <div class="row">
-    <h1>Index</h1>
+    <h1>Search results for "@ViewBag.Name"</h1> 
     <div class="col-md-4 ml-auto">
         <form asp-action="ShowSearchResult">
             <div class="form-group">
@@ -31,10 +31,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Game)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
             <th></th>
         </tr>
     </thead>
@@ -49,12 +45,9 @@
                     @Html.DisplayFor(modelItem => item.Game)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User)
-                </td>
-                <td>
-                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

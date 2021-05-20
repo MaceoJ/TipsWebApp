@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,7 @@ namespace TipsTricksWebApp.Controllers
     public class TipsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public TipsController(ApplicationDbContext context)
         {
@@ -30,7 +33,8 @@ namespace TipsTricksWebApp.Controllers
         //Currently searches both the title and game for the search query
         public async Task<IActionResult> ShowSearchResult(string SearchPhrase)
         {
-            return View("Index", await _context.Tip.Where(t => t.Title.Contains(SearchPhrase) || t.Game.Contains(SearchPhrase)).ToListAsync());
+            ViewBag.Name = SearchPhrase;
+            return View("ShowSearchResult", await _context.Tip.Where(t => t.Title.Contains(SearchPhrase) || t.Game.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Tips/Details/5
@@ -64,10 +68,11 @@ namespace TipsTricksWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Game,Description")] Tip tip)
+        public async Task<IActionResult> Create([Bind("Id,Title,Game,Description,User")] Tip tip)
         {
             if (ModelState.IsValid)
             {
+                tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 _context.Add(tip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,6 +94,10 @@ namespace TipsTricksWebApp.Controllers
             {
                 return NotFound();
             }
+            if (tip.User != User.FindFirstValue(ClaimTypes.NameIdentifier)) 
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(tip);
         }
 
@@ -98,7 +107,7 @@ namespace TipsTricksWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description")] Tip tip)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description,User")] Tip tip)
         {
             if (id != tip.Id)
             {
@@ -109,6 +118,7 @@ namespace TipsTricksWebApp.Controllers
             {
                 try
                 {
+                    tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     _context.Update(tip);
                     await _context.SaveChangesAsync();
                 }
@@ -143,7 +153,10 @@ namespace TipsTricksWebApp.Controllers
             {
                 return NotFound();
             }
-
+            if (tip.User != User.FindFirstValue(ClaimTypes.NameIdentifier)) 
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(tip);
         }
 
