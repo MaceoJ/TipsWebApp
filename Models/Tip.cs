@@ -16,6 +16,8 @@ namespace TipsTricksWebApp.Models
         public string Description { get; set; }
 
         public string User { get; set; }
+
+        public string Username { get; set; }
         public Tip()
         {
 

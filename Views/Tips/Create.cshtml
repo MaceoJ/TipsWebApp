@@ -17,9 +17,17 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
+            <!-- Was originally going to use select here. However, Allowing user to input games that would be more niche seems more beneficial -->
             <div class="form-group">
                 <label asp-for="Game" class="control-label"></label>
-                <input asp-for="Game" class="form-control" />
+                <input asp-for="Game" class="form-control" list="games" name="browser" id="browser">
+                <datalist id="games">
+                    <option value="Apex" />
+                    <option value="Destiny 2" />
+                    <option value="Overwatch" />
+                    <option value="Valorant" />
+                </datalist>
                 <span asp-validation-for="Game" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,6 +46,10 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script src="tail.select-full.min.js"></script>
+<script>
+    tail.select()
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
