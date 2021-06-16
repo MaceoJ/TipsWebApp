@@ -1,16 +1,18 @@
-﻿@model IEnumerable<TipsTricksWebApp.Models.Tip>
+﻿@model PaginatedList<TipsTricksWebApp.Models.Tip>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="row">
-    <h1>Index</h1>
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Knowledgebase for gaming tips and tricks</h1>
+    </div>
     <div class="col-md-4 ml-auto">
         <form asp-action="ShowSearchResult">
             <div class="form-group">
                 <label for="SearchPhrase" class="control-label"></label>
-                <input name="SearchPhrase" class="form-control" />
+                <input name="SearchPhrase" class="form-control" placeholder="Search for a Title or Game" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Search" class="btn btn-primary" />
@@ -26,13 +28,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game)
+                Game
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                User
             </th>
             <th>
             <th></th>
@@ -60,3 +62,19 @@
         }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-outline-secondary @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-outline-secondary @nextDisabled">
+    Next
+</a>

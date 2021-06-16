@@ -12,16 +12,40 @@ a {
   color: #0366d6;
 }
 
+body {
+    background-color: #f0f0f0;
+}
+
+/*
+input[type=text] {
+    background-color: #858585
+}
+
+h1 {
+    color: #fff;
+}
+
+th {
+    color: #fff;
+}
+
+td {
+    color: #fff;
+}
+*/
+
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
 
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles

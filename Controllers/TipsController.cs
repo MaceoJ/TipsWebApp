@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TipsTricksWebApp.Data;
 using TipsTricksWebApp.Models;
+using PagedList;
 
 namespace TipsTricksWebApp.Controllers
 {
@@ -24,15 +25,21 @@ namespace TipsTricksWebApp.Controllers
         }
 
         // GET: Tips
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Tip.ToListAsync());
+            var tips = from t in _context.Tip select t;
+            int pageSize = 3;
+            return View(await PaginatedList<Tip>.CreateAsync(tips.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // POST: Tips/ShowSearchResult
         //Currently searches both the title and game for the search query
         public async Task<IActionResult> ShowSearchResult(string SearchPhrase)
         {
+            if (SearchPhrase == null) 
+            {
+                return RedirectToAction(nameof(Index));
+            }
             ViewBag.Name = SearchPhrase;
             return View("ShowSearchResult", await _context.Tip.Where(t => t.Title.Contains(SearchPhrase) || t.Game.Contains(SearchPhrase)).ToListAsync());
         }
@@ -73,6 +80,7 @@ namespace TipsTricksWebApp.Controllers
             if (ModelState.IsValid)
             {
                 tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //The usernamer that will actually be displayed
                 tip.Username = User.FindFirstValue(ClaimTypes.Name);
                 _context.Add(tip);
                 await _context.SaveChangesAsync();
@@ -108,7 +116,7 @@ namespace TipsTricksWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description,User")] Tip tip)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description,User,Username")] Tip tip)
         {
             if (id != tip.Id)
             {
@@ -120,6 +128,8 @@ namespace TipsTricksWebApp.Controllers
                 try
                 {
                     tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    //The usernamer that will actually be displayed
+                    tip.Username = User.FindFirstValue(ClaimTypes.Name);
                     _context.Update(tip);
                     await _context.SaveChangesAsync();
                 }
