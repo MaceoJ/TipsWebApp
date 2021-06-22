@@ -11,6 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Images\Apex_legends_cover.jpg" />
+    <None Include="wwwroot\Images\download.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="4.0.40804" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />

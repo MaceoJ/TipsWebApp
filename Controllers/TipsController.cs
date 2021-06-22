@@ -25,10 +25,51 @@ namespace TipsTricksWebApp.Controllers
         }
 
         // GET: Tips
-        public async Task<IActionResult> Index(int? pageNumber)
+        public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageNumber)
         {
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
             var tips = from t in _context.Tip select t;
-            int pageSize = 3;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tips = tips.Where(t => t.Title.Contains(searchString)
+                                       || t.Game.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Tip>.CreateAsync(tips.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        // GET: Tips
+        [Authorize]
+        public async Task<IActionResult> MyTips(string currentFilter, string searchString, int? pageNumber)
+        {
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+            var tips = from t in _context.Tip select t;
+            tips = tips.Where(t => t.User == User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tips = tips.Where(t => (t.Title.Contains(searchString)
+                                       || t.Game.Contains(searchString)) && t.User == User.FindFirstValue(ClaimTypes.NameIdentifier));
+            }
+
+            int pageSize = 5;
             return View(await PaginatedList<Tip>.CreateAsync(tips.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -128,6 +169,7 @@ namespace TipsTricksWebApp.Controllers
                 try
                 {
                     tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                     //The usernamer that will actually be displayed
                     tip.Username = User.FindFirstValue(ClaimTypes.Name);
                     _context.Update(tip);

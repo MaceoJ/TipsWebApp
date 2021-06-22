@@ -1,7 +1,7 @@
 ﻿@model PaginatedList<TipsTricksWebApp.Models.Tip>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MyTips";
 }
 
 <div class="row">
@@ -9,14 +9,14 @@
         <h1 class="display-4">Welcome to the Knowledgebase for gaming tips and tricks</h1>
     </div>
     <div class="col-md-4 ml-auto">
-        <form asp-action="Index" method="get">
+        <form asp-action="MyTips" method="get">
             <div class="form-group">
                 <p>
-                    <input type="text" name="SearchString" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search for a Game of Title"/>
+                    <input type="text" name="SearchString" class="form-control" value="@ViewData["CurrentFilter"]" placeholder="Search for a Game of Title" />
                     <div class="col-md-3 offset-md-9">
                         <input type="submit" value="Search" class="btn btn-primary" />
                     </div>
-                    
+
                 </p>
             </div>
         </form>
@@ -69,13 +69,13 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
+<a asp-action="MyTips"
    asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
    class="btn btn-outline-secondary @prevDisabled">
     Previous
 </a>
-<a asp-action="Index"
+<a asp-action="MyTips"
    asp-route-pageNumber="@(Model.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
    class="btn btn-outline-secondary @nextDisabled">
