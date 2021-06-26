@@ -18,6 +18,8 @@ namespace TipsTricksWebApp.Models
         public string User { get; set; }
 
         public string Username { get; set; }
+
+        public DateTime CreatedTime { get; set; }
         public Tip()
         {
 

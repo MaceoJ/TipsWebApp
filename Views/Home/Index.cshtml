@@ -1,8 +1,178 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<h1>Explore Tips for Popular Games</h1>
+
 <div class="card-deck">
-    <div class="card mb-5" style="max-width: 540px;">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Valorant.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Valorant</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Valorant">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Minecraft.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Minecraft</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Minecraft">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Warzone.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Warzone</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Warzone">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Overwatch.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Overwatch</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Overwatch">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Skyrim.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Skyrim</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Skyrim">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Fortnite.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Fortnite</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Fortnite">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Stardew.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Stardew Valley</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Stardew Valley">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/LoL.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">League of Legends</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="League of Legends">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/DarkSouls3.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Dark Souls 3</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Dark Souls 3">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Destiny2.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Destiny 2</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Destiny 2">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Phasmophobia.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Phasmophobia</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Phasmophobia">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/GTAV.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">GTA V</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="GTA V">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
         <div class="row no-gutters">
             <div class="col">
                 <img src="~/Images/Apex_legends_cover.jpg" class="card-img" alt="cannot be displayed">
@@ -15,30 +185,112 @@
             </div>
         </div>
     </div>
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card mb-5">
         <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="~/Images/Apex_legends_cover.jpg" class="card-img" alt="cannot be displayed">
+            <div class="col">
+                <img src="~/Images/Celeste.jpg" class="card-img" alt="cannot be displayed">
             </div>
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <h4 class="card-title">Celeste</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Celeste">Explore</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card mb-5">
         <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="~/Images/Apex_legends_cover.jpg" class="card-img" alt="cannot be displayed">
+            <div class="col">
+                <img src="~/Images/CSGO.jpg" class="card-img" alt="cannot be displayed">
             </div>
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <h4 class="card-title">CSGO</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="CSGO">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Borderlands3.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Borderlands 3</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Borderlands 3">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Dota2.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Dota 2</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Dota 2">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/Sekiro.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Sekiro: Shadows Die Twice</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Sekiro: Shadows Die Twice">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/WoW.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">World of Warcraft</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="World of Warcraft">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/RainbowSixSiege.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Rainbow Six Siege</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Rainbow Six Siege">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <div class="row no-gutters">
+            <div class="col">
+                <img src="~/Images/ESO.jpg" class="card-img" alt="cannot be displayed">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h4 class="card-title">Elder Scrolls Online</h4>
+                    <a class="btn btn-primary" asp-controller="Tips" asp-action="Index" asp-route-currentFilter="Elder Scrolls Online">Explore</a>
                 </div>
             </div>
         </div>

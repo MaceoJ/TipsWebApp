@@ -25,8 +25,10 @@ namespace TipsTricksWebApp.Controllers
         }
 
         // GET: Tips
-        public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageNumber, string sortOrder)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_asc" : "";
             if (searchString != null)
             {
                 pageNumber = 1;
@@ -37,6 +39,17 @@ namespace TipsTricksWebApp.Controllers
             }
             ViewData["CurrentFilter"] = searchString;
             var tips = from t in _context.Tip select t;
+
+            switch (sortOrder)
+            {
+                case "date_asc":
+                    tips = tips.OrderBy(t => t.CreatedTime);
+                    break;
+                default:
+                    tips = tips.OrderByDescending(t => t.CreatedTime);
+                    break;
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 tips = tips.Where(t => t.Title.Contains(searchString)
@@ -49,8 +62,10 @@ namespace TipsTricksWebApp.Controllers
 
         // GET: Tips
         [Authorize]
-        public async Task<IActionResult> MyTips(string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> MyTips(string currentFilter, string searchString, int? pageNumber, string sortOrder)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_asc" : "";
             if (searchString != null)
             {
                 pageNumber = 1;
@@ -62,6 +77,16 @@ namespace TipsTricksWebApp.Controllers
             ViewData["CurrentFilter"] = searchString;
             var tips = from t in _context.Tip select t;
             tips = tips.Where(t => t.User == User.FindFirstValue(ClaimTypes.NameIdentifier));
+           
+            switch (sortOrder)
+            {
+                case "date_asc":
+                    tips = tips.OrderBy(t => t.CreatedTime);
+                    break;
+                default:
+                    tips = tips.OrderByDescending(t => t.CreatedTime);
+                    break;
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -116,13 +141,14 @@ namespace TipsTricksWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Game,Description,User,Username")] Tip tip)
+        public async Task<IActionResult> Create([Bind("Id,Title,Game,Description,User,Username,CreatedTime")] Tip tip)
         {
             if (ModelState.IsValid)
             {
                 tip.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 //The usernamer that will actually be displayed
                 tip.Username = User.FindFirstValue(ClaimTypes.Name);
+                tip.CreatedTime = DateTime.Now;
                 _context.Add(tip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -157,7 +183,7 @@ namespace TipsTricksWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description,User,Username")] Tip tip)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Game,Description,User,Username,CreatedTime")] Tip tip)
         {
             if (id != tip.Id)
             {
@@ -172,6 +198,7 @@ namespace TipsTricksWebApp.Controllers
 
                     //The usernamer that will actually be displayed
                     tip.Username = User.FindFirstValue(ClaimTypes.Name);
+                    tip.CreatedTime = DateTime.Now;
                     _context.Update(tip);
                     await _context.SaveChangesAsync();
                 }
